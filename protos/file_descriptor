@@ -1,0 +1,66 @@
+file {
+  name: "chat.proto"
+  package: "chat"
+  message_type {
+    name: "SendMessageRequest"
+    field {
+      name: "id"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "id"
+    }
+    field {
+      name: "message"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "message"
+    }
+  }
+  message_type {
+    name: "SendMessageResponse"
+  }
+  message_type {
+    name: "OnMessageRequest"
+    field {
+      name: "id"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "id"
+    }
+  }
+  message_type {
+    name: "OnMessageResponse"
+    field {
+      name: "id"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "id"
+    }
+    field {
+      name: "message"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "message"
+    }
+  }
+  service {
+    name: "ChatService"
+    method {
+      name: "sendMessage"
+      input_type: ".chat.SendMessageRequest"
+      output_type: ".chat.SendMessageResponse"
+    }
+    method {
+      name: "onMessage"
+      input_type: ".chat.OnMessageRequest"
+      output_type: ".chat.OnMessageResponse"
+      server_streaming: true
+    }
+  }
+  syntax: "proto3"
+}

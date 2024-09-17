@@ -38,7 +38,18 @@
    });
    ```
 
-2. Start server gRPC service:
+2. Optional. Generate file descriptor:
+
+   ```sh
+   $ file_name=file_descriptor \
+     && protoc --descriptor_set_out $file_name.bin **/*.proto \
+     && protoc < $file_name.bin --decode=google.protobuf.FileDescriptorSet google/protobuf/descriptor.proto > $file_name \
+     && rm $file_name.bin
+   ```
+
+   and upload it to the gRPC Web Devtools.
+
+3. Start server gRPC service:
 
    ```shell
    cd server
@@ -46,13 +57,13 @@
    npm run dev
    ```
 
-3. Start envoy proxy:
+4. Start envoy proxy:
 
    ```shell
    envoy -c envoy.yaml
    ```
 
-4. Start client dev server:
+5. Start client dev server:
 
    ```shell
    cd client
@@ -60,7 +71,7 @@
    npm run dev
    ```
 
-5. Open a browser tab and navigate to:
+6. Open a browser tab and navigate to:
 
    ```
    localhost:8081
